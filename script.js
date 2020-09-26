@@ -98,14 +98,14 @@ function checkResponse(){
     var response = this.value;
     if(response !== questionAnswer){
                 //subtract time 
-                timeSubtractionTime()
-                console.log("else is happening")
+                timeSubtractionTime();
+                console.log("if is happening");
                 return
     }
     else{
         questionIndex++;//move ahead cue to next question
         score++;//increase score
-        generateQuestion()//start next question
+        generateQuestion();//start next question
     }
 }
 
@@ -135,8 +135,8 @@ function startTimer(){
     }
 //stopQuiz function
 function stopQuiz(){
- console.log("End of quiz!!!!")
- timeLeft= 1000000
+ console.log("End of quiz!!!!");
+ timeLeft= 1000000;
  timerEl.textContent = 'Nice Job!';
  questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
  singleQuestionEl.textContent = "Your final score is " + score*10 + ".";//give question content
