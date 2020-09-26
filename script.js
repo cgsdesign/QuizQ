@@ -11,14 +11,10 @@
 //
 //-------switch, function, task id, 
 var mainStartButtonEl = document.querySelector("#startButton");
-var answerResponseEL = document.querySelector("#option");
-//???var questionsBoxEl = document.querySelector("#questions");//grandparent <ul>
-
-//var questionLineEl = questions.createElement("div");
-//.forEach
 
 
-
+//Quiz questions 
+//---------NOTE: array in list in array , this is important for 4 loop & quizQuestionEl++
 var quizQuestionEl = [
     
 {question:"1 is true?",answer:"yes",
@@ -90,7 +86,8 @@ function generateQuestion(){
     return
 } 
 
-//check if question chosen is correct. this.value generates equivelent of eventListener
+//check if question chosen is correct. 
+//---------this.value generates equivelent of eventListener!!!!!!!
 function checkResponse(){
     var response = this.value;
     if(response !== questionAnswer){
@@ -102,7 +99,7 @@ function checkResponse(){
         questionIndex++;//move ahead cue to next question
         score++;//increase score
         console.log(score)
-        startQuiz()
+        generateQuestion()
     }
 }
 
