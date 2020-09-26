@@ -96,34 +96,38 @@ function generateQuestion(){
 //---------this.value generates equivelent of eventListener!!!!!!!
 function checkResponse(){
     var response = this.value;
-    if(response === questionAnswer){
+    if(response !== questionAnswer){
+                //subtract time 
+                timeSubtractionTime()
+                console.log("else is happening")
+                return
+    }
+    else{
         questionIndex++;//move ahead cue to next question
         score++;//increase score
         generateQuestion()//start next question
-        return
-    }
-    else{
-  //      //subtract time 
-        timeSubtractiontime()
     }
 }
 
 //subtract time for wrong answer
-function timeSubtractiontime(){
+function timeSubtractionTime(){
     questionTimeLeft=timeLeft - 10;
     timeLeft=questionTimeLeft;
     timerEl.textContent = timeLeft;
     return(timeLeft)
     //Check timer, make sure its not at zeroreturn
 }
+
 //timer function
 function startTimer(){
       var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
+        if (timeLeft === 1000000) {
+            return}
+        else if (timeLeft > 1) {
           timerEl.textContent = timeLeft;
           timeLeft = timeLeft -1;
         } else {
-          timerEl.textContent = 'Times Up!';
+          timerEl.textContent = 'Times up!';
           clearInterval(timeInterval);
           stopQuiz()
         }
@@ -132,6 +136,8 @@ function startTimer(){
 //stopQuiz function
 function stopQuiz(){
  console.log("End of quiz!!!!")
+ timeLeft= 1000000
+ timerEl.textContent = 'Nice Job!';
  questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
  singleQuestionEl.textContent = "Your final score is " + score*10 + ".";//give question content
  questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
