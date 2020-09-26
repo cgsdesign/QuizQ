@@ -10,7 +10,6 @@
 //create variables
 //
 //-------switch, function, task id, 
-var mainStartButtonEl = document.querySelector("#startButton");
 
 
 //Quiz questions 
@@ -40,14 +39,14 @@ var quizQuestionEl = [
          "z"
     ]
 }
-] ;
+];
 
-
+var mainStartButtonEl = document.querySelector("#startButton");
 var questionIndex = 0;
 var score = 0;
 var options = quizQuestionEl[questionIndex].option;
 var questionAnswer = quizQuestionEl[questionIndex].answer;
-
+var timeLeft = 30;
 
 
 
@@ -61,8 +60,9 @@ var questionAnswer = quizQuestionEl[questionIndex].answer;
 
 //start function
 var startQuiz = function() {
+    startTimer()
     generateQuestion()         
-   
+    
 }
 //generate question function
 function generateQuestion(){
@@ -92,7 +92,13 @@ function checkResponse(){
     var response = this.value;
     if(response !== questionAnswer){
         //subtract time 
+        function timeSubtractiontime(questionTimeLeft){
+            questionTimeLeft=timeLeft - 5;
+            questionTimeLeft -= 5000;
+        //timeLeft=questionTimeLeft
+        timeLeft.appendChild(questionTimeLeft)
         //Check timer, make sure its not at zeroreturn
+        }
     
     }
     else{
@@ -102,11 +108,37 @@ function checkResponse(){
         generateQuestion()
     }
 }
+//timer function
+function startTimer(){
+    var timerEl = document.getElementById('timer');
+    function timedCount() {
+        document.getElementById("timer").value = time;
+        time = time + 1;
+        t = setTimeout(timedCount, 1000);
+      }
+      // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+      var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
+          timerEl.textContent = timeLeft;
+          timeLeft--;
+        } else {
+          timerEl.textContent = '';
+          clearInterval(timeInterval);
+          displayMessage();
+        }
+      }, 1000);
 
+}
+//stopQuiz function
+function stopQuiz(){
 
+}
+//record highscore function
+function highScore(){
+
+}
 
 
 mainStartButtonEl.addEventListener("click", startQuiz)
-//pageContentEl.addEventListener("click", taskButtonHandler)
 
-//for our challenge, we will need to print to screen not alert 
+//for this challenge, we will need to print to screen not alert 

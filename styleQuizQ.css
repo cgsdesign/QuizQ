@@ -14,8 +14,8 @@ body {
     border: solid 4px #ff8d0a;
     background: #ededed;
     padding: 20px;
-    width: 50%;
     border-radius: 20px;
+    text-align:center;
     
 }
 .inner-box {
