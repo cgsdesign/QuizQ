@@ -47,9 +47,10 @@ var score = 0;
 var options = quizQuestionEl[questionIndex].option;
 var questionAnswer = quizQuestionEl[questionIndex].answer;
 var timeLeft = 200;
-var questionBoxEl = document.querySelector("#questions")//find box
+var questionBoxEl = document.querySelector("#questions");//find box
 var singleQuestionEl = document.createElement("h4");//define
 var timerEl = document.getElementById('timer');
+var correctJudgement = document.getElementById("#correct");
 //var subQuestionChoicesEl = document.querySelector("#startButton");
 
 //questionIndex++
@@ -98,7 +99,8 @@ function checkResponse(){
     if(response !== questionAnswer){
                 //subtract time 
                 timeSubtractionTime();
-                console.log("if is happening");
+                singleQuestionEl.textContent = "Please try again.";//give question content
+                questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
                 return
     }
     else{
@@ -138,7 +140,7 @@ function stopQuiz(){
  timeLeft= 1000000;
  timerEl.textContent = 'Nice Job!';
  questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
- singleQuestionEl.textContent = "Your final score is " + score*10 + ".";//give question content
+ singleQuestionEl.textContent = "Your final score is " + score + ".";//give question content
  questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
 }
 //record highscore function
