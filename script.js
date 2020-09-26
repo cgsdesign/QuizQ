@@ -31,23 +31,24 @@ var quizQuestionEl = [
     { question:"2 is true?",answer:"yes",
     option: [ 
          "yes",
-         "no",
-        "no",
-        "no"
+         "radish",
+        "dog",
+        "dream"
     ]
 },
     { question:"3 is true?",answer:"yes",
     option: [
          "yes",
          "no",
-         "no",
-         "no"
+         "q",
+         "z"
     ]
 }
 ] ;
 
 
 var questionIndex = 0;
+var score = 0;
 var options = quizQuestionEl[questionIndex].option;
 var questionAnswer = quizQuestionEl[questionIndex].answer;
 
@@ -62,25 +63,22 @@ var questionAnswer = quizQuestionEl[questionIndex].answer;
 
 
 
-
+//start function
 var startQuiz = function() {
     generateQuestion()         
    
 }
-
+//generate question function
 function generateQuestion(){
     var questionBoxEl = document.querySelector("#questions")//find box
-        questionBoxEl.innerHTML = ""; 
-    var singleQuestionEl = document.createElement("h4");//define and put in box
-        singleQuestionEl.textContent = quizQuestionEl[questionIndex].question;
-
-
-   // var questionAnswersEl = document.querySelector("#options")//find questions
-    questionBoxEl.appendChild(singleQuestionEl);//put in box   
+        questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
+    var singleQuestionEl = document.createElement("h4");//define
+        singleQuestionEl.textContent = quizQuestionEl[questionIndex].question;//give question content
+    questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
    
-    console.log(options)
+    //print answers to screen loop
     for (let i = 0; i < options.length; i++) {
-        var btn = document.createElement("BUTTON");
+        var btn = document.createElement("button");
       
         btn.setAttribute("value", options[i]);
         btn.setAttribute("class", "option-button")
@@ -92,19 +90,18 @@ function generateQuestion(){
     return
 } 
 
+//check if question chosen is correct. this.value generates equivelent of eventListener
 function checkResponse(){
-    console.log("working", this.value )
     var response = this.value;
     if(response !== questionAnswer){
-        console.log("wrong")
-        return
         //subtract time 
-        //Check timer, make sure its not at zero
+        //Check timer, make sure its not at zeroreturn
     
     }
     else{
-        questionIndex++;
-        console.log("right");
+        questionIndex++;//move ahead cue to next question
+        score++;//increase score
+        console.log(score)
         startQuiz()
     }
 }
