@@ -50,7 +50,7 @@ var timeLeft = 200;
 var questionBoxEl = document.querySelector("#questions")//find box
 var singleQuestionEl = document.createElement("h4");//define
 var timerEl = document.getElementById('timer');
-
+//var subQuestionChoicesEl = document.querySelector("#startButton");
 
 //questionIndex++
 //check to see if you reached last question
@@ -75,15 +75,14 @@ function generateQuestion(){
     
         //print answers to screen loop
         for (let i = 0; i < options.length; i++) {
-            var btn = document.createElement("button");
+            var choice = document.createElement("button");
 
-            btn.setAttribute("value", options[i]);
-            btn.setAttribute("class", "option-button")
-            btn.onclick = checkResponse;
-            btn.textContent = options[i];
-            questionBoxEl.appendChild(btn)
+            choice.setAttribute("value", options[i]);
+            choice.setAttribute("class", "option-button")
+            choice.onclick = checkResponse;// This is the on click checkResponse function call
+            choice.textContent = options[i];
+            questionBoxEl.appendChild(choice)
         }
-        checkResponse()   // questionAnswersEl.innerHTML = "<p> quiz
         return
     }
     else {
