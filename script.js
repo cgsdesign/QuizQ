@@ -46,8 +46,10 @@ var questionIndex = 0;
 var score = 0;
 var options = quizQuestionEl[questionIndex].option;
 var questionAnswer = quizQuestionEl[questionIndex].answer;
-var timeLeft = 30;
-
+var timeLeft = 200;
+var questionBoxEl = document.querySelector("#questions")//find box
+var singleQuestionEl = document.createElement("h4");//define
+var timerEl = document.getElementById('timer');
 
 
 //questionIndex++
@@ -61,77 +63,78 @@ var timeLeft = 30;
 //start function
 var startQuiz = function() {
     startTimer()
-    generateQuestion()         
-    
+    generateQuestion()          
 }
+
 //generate question function
 function generateQuestion(){
-    var questionBoxEl = document.querySelector("#questions")//find box
         questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
-    var singleQuestionEl = document.createElement("h4");//define
+    if ( questionIndex < quizQuestionEl.length){
         singleQuestionEl.textContent = quizQuestionEl[questionIndex].question;//give question content
-    questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
-   
-    //print answers to screen loop
-    for (let i = 0; i < options.length; i++) {
-        var btn = document.createElement("button");
-      
-        btn.setAttribute("value", options[i]);
-        btn.setAttribute("class", "option-button")
-        btn.onclick = checkResponse;
-        btn.textContent = options[i];
-        questionBoxEl.appendChild(btn)
+        questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
+    
+        //print answers to screen loop
+        for (let i = 0; i < options.length; i++) {
+            var btn = document.createElement("button");
+
+            btn.setAttribute("value", options[i]);
+            btn.setAttribute("class", "option-button")
+            btn.onclick = checkResponse;
+            btn.textContent = options[i];
+            questionBoxEl.appendChild(btn)
+        }
+        checkResponse()   // questionAnswersEl.innerHTML = "<p> quiz
+        return
     }
-    checkResponse()   // questionAnswersEl.innerHTML = "<p> quiz
-    return
+    else {
+        stopQuiz()
+
+    }
 } 
 
 //check if question chosen is correct. 
 //---------this.value generates equivelent of eventListener!!!!!!!
 function checkResponse(){
     var response = this.value;
-    if(response !== questionAnswer){
-        //subtract time 
-        function timeSubtractiontime(questionTimeLeft){
-            questionTimeLeft=timeLeft - 5;
-            questionTimeLeft -= 5000;
-        //timeLeft=questionTimeLeft
-        timeLeft.appendChild(questionTimeLeft)
-        //Check timer, make sure its not at zeroreturn
-        }
-    
-    }
-    else{
+    if(response === questionAnswer){
         questionIndex++;//move ahead cue to next question
         score++;//increase score
-        console.log(score)
-        generateQuestion()
+        generateQuestion()//start next question
+        return
     }
+    else{
+  //      //subtract time 
+        timeSubtractiontime()
+    }
+}
+
+//subtract time for wrong answer
+function timeSubtractiontime(){
+    questionTimeLeft=timeLeft - 10;
+    timeLeft=questionTimeLeft;
+    timerEl.textContent = timeLeft;
+    return(timeLeft)
+    //Check timer, make sure its not at zeroreturn
 }
 //timer function
 function startTimer(){
-    var timerEl = document.getElementById('timer');
-    function timedCount() {
-        document.getElementById("timer").value = time;
-        time = time + 1;
-        t = setTimeout(timedCount, 1000);
-      }
-      // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
       var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
           timerEl.textContent = timeLeft;
-          timeLeft--;
+          timeLeft = timeLeft -1;
         } else {
-          timerEl.textContent = '';
+          timerEl.textContent = 'Times Up!';
           clearInterval(timeInterval);
-          displayMessage();
+          stopQuiz()
         }
       }, 1000);
-
-}
+    }
 //stopQuiz function
 function stopQuiz(){
-
+ console.log("End of quiz!!!!")
+ questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
+ singleQuestionEl.textContent = "Your final score is " + score*10 + ".";//give question content
+ questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
 }
 //record highscore function
 function highScore(){
@@ -142,3 +145,5 @@ function highScore(){
 mainStartButtonEl.addEventListener("click", startQuiz)
 
 //for this challenge, we will need to print to screen not alert 
+//4.5.6 - must mirror past create El
+//html DOM info field
