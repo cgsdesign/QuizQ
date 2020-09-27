@@ -50,7 +50,8 @@ var timeLeft = 200;
 var questionBoxEl = document.querySelector("#questions");//find box
 var singleQuestionEl = document.createElement("h4");//define
 var timerEl = document.getElementById('timer');
-var correctJudgement = document.getElementById("#correct");
+var highScoreEl = document.getElementById("#high-score");
+
 //var subQuestionChoicesEl = document.querySelector("#startButton");
 
 //questionIndex++
@@ -135,22 +136,68 @@ function startTimer(){
       }, 1000);
     }
 
+
+//building form
+var nameEnteryEl = document.querySelector("#high-score"); 
+var taskIdCounter = 0;
+function makePlayerNameForm() { 
+
+    // Create a form synamically 
+    var form = document.createElement("form"); 
+
+    // Create an input element for Name
+    var PlayerEl = document.createElement("input"); 
+    PlayerEl.setAttribute("type", "text"); 
+    PlayerEl.setAttribute("name", "player"); 
+    PlayerEl.setAttribute("data-task-id", taskIdCounter);
+
+    // Create a submit button 
+    var s = document.createElement("input"); 
+    s.setAttribute("type", "submit"); 
+    s.setAttribute("value", "Submit"); 
+    s.onclick = logScores;// This is the on click checkResponse function call
+
+
+    // Append the player name input to the form 
+    form.append(PlayerEl);  
+    // Append the button to the form 
+    form.append(s);  
+    
+   nameEnteryEl.appendChild(form); 
+}
+var logScores = function(){
+    console.log("test")
+    taskIdCounter++;
+}
+
+
 //stopQuiz function
 function stopQuiz(){
- console.log("End of quiz!!!!");
- timeLeft= -11111111;
- timerEl.textContent = 'Nice Job!';
- questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
- singleQuestionEl.textContent = "Your final score is " + score + ".";//give question content
- questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
-}
+    console.log("End of quiz!!!!");
+    timeLeft= -11111111;
+    timerEl.textContent = 'Nice Job!';
+    questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
+    singleQuestionEl.textContent = "Your final score is " + score + ".";//give question content
+    questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
+    makePlayerNameForm()
+   }
+
+
 //record highscore function
 function highScore(){
 
+ //   highScoreEl.innerHTML="Enter your name and hit return to save your high score!<input type='text'><input/>";
+ //   questionBoxEl.appendChild(highScoreEl);//put in box on page 
+ //   questionBoxEl.addEventListener("submit", saveQuiz)
+}
+function saveQuiz(){
+    console.log()
 }
 
 
+//give question content
 mainStartButtonEl.addEventListener("click", startQuiz)
+questionBoxEl.addEventListener("submit",logScores)
 
 //for this challenge, we will need to print to screen not alert 
 //4.5.6 - must mirror past create El
