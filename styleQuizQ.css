@@ -63,6 +63,7 @@ li {
     padding: 20px;
     border-radius: 20px;
     text-align:center;
+    width: 50%;
     
 }
 .inner-box {
@@ -103,6 +104,14 @@ li {
     text-align:center;
     margin:auto;
     padding: 20px;
+    width: 50%;
 }
 
+@media screen and (max-width: 980px) {
 
+.question-box {
+    width: 95%;
+}
+.center-padded {
+    width:95%;
+}
