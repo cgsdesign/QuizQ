@@ -59,17 +59,6 @@ var currentItem = document.querySelector("#scoreList");
 //var subQuestionChoicesEl = document.querySelector("#startButton");
 
 
-//pull pasy winners
-function pullPastQuizes(){
-    var listItems = 0;
-    for(var i=0; i<count; i++){
-        currentItem = localStorage.getItem("score"+i);
-        listItems.innerHTML = scoreList.innerHTML + "<li>" + currentItem + "</li>";
-        scoreList.appendChild(listItems)
-    }
-
-    }
-
 //start function
 var startQuiz = function() {
     startTimer()
@@ -140,6 +129,7 @@ function startTimer(){
           timeLeft = timeLeft -1;
         } else {
           timerEl.textContent = 'Times up!';
+          timeLeft = 0
           clearInterval(timeInterval);
           stopQuiz()
         }
@@ -150,9 +140,8 @@ function startTimer(){
 
 function makePlayerNameForm() { 
     var form = document.createElement("form"); 
-    form.setAttribute("id", "playerFormID"); 
-    form.setAttribute("data-task-id", taskIdCounter);
-   // --------------form.onsubmit = logScores;// This is the on click checkResponse function call
+    form.setAttribute("id", "playerFormID");
+    form.onsubmit = logScores;// This is the on click checkResponse function call
 
     // Create an input element for Name
     var PlayerEl = document.createElement("input"); 
@@ -173,28 +162,36 @@ function makePlayerNameForm() {
 
    nameEnteryEl.appendChild(form); 
 }
-//save the player info as an object
+
+//pull past winners
+function pullPastQuizes(){
+    var listItems = 0;
+    for(var i=0; i<count; i++){
+        listItem = localStorage.getItem("score"+i);
+        currentItems.innerHTML = currentItem.innerHTML + "<li>" + llistItem + "</li>";
+        currentItem.appendChild(listItems)
+    }
+}
+
+//save the player info as an object and store on local storage 
 var logScores = function(){
-    console.log("test")
     var playerNameInput = document.querySelector("input[name='playerName']").value;
+    var playerDataObj = {
+        name: playerNameInput,
+        playerScore: score
+    }
+    console.log(playerDataObj)
     if (!playerNameInput) {
-        alert("Please fill our all of the form.")
+        alert("Please choose a name.")
         return false
     }
     else{
-    var playerDataObj = {
-        name: playerNameInput,
-        playerScore: score,
-       //--------------- playerNumber: taskIdCounter
-    }
-    console.log(playerDataObj)
-    localStorage.setItem("score"+count,JSON.stringify(playerDataObj));
-    //------------------taskIdCounter++;
+    localStorage.setItem("score"+count, JSON.stringify(playerDataObj));
     count++;
     localStorage.setItem("count",count)
-    prompt("do you wantto replay?")//set to stop process
+    return false
     }
-}//this is when the whole thing is auto refreshing
+}
 
 
 //stopQuiz function
