@@ -20,7 +20,7 @@ var mainStartButtonEl = document.querySelector("#startButton");
 var ButtonBoxEl = document.querySelector("#Button-Box");
 var questionIndex = 0;
 var score = 0;
-var options = quizQuestionEl[questionIndex].option;
+//var options = quizQuestionEl[questionIndex].option;
 var questionAnswer = quizQuestionEl[questionIndex].answer;
 var timeLeft = 200;
 var questionBoxEl = document.querySelector("#questions");//find box
@@ -31,6 +31,7 @@ var enterEl = document.querySelector("#playerFormID");
 var count = 1;
 var taskIdCounter = 0;
 var currentItem = document.querySelector("#scoreList");
+var correctFalse = document.querySelector("#correct");
 //var subQuestionChoicesEl = document.querySelector("#startButton");
 var listItem = {
     name: "fill",
@@ -72,15 +73,15 @@ var startQuiz = function() {
 //generate question function
 function generateQuestion(){
     questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
+    var options = quizQuestionEl[questionIndex].option;
 
     if ( questionIndex < quizQuestionEl.length){
         singleQuestionEl.textContent = quizQuestionEl[questionIndex].question;//give question content
         questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
-
         //print answers to screen loop
         for (let i = 0; i < options.length; i++) {
             var choice = document.createElement("button");
-            
+
             choice.setAttribute("value", options[i]);
             choice.setAttribute("class", "option-button")
             choice.onclick = checkResponse;// This is the on click checkResponse function call
@@ -99,11 +100,12 @@ function generateQuestion(){
 //---------this.value generates equivelent of eventListener!!!!!!!
 function checkResponse(){
     var response = this.value;
-    if(response !== questionAnswer){
+    if(response !== quizQuestionEl[questionIndex].answer){
                 //subtract time 
                 timeSubtractionTime();
-                singleQuestionEl.textContent = "Please try again.";//give question content
-                questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
+                // var tryAgain = ""
+                // tryAgain.textContent = "Please try again.";//give question content
+                // correctFalse.append(tryAgain);//put in box on page 
                 return
     }
     else{
