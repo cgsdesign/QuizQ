@@ -1,34 +1,21 @@
+//# Sentence Reversal
+// Given any sentence, reverse the order that the words are in. So, the sentence "The quick brown fox jumped over the lazy dog" might read "dog lazy the over jumped fox brown quick The" when reversed.
 
-      //building form
-var nameEnteryEl = document.querySelector("#high-score"); 
-var taskIdCounter = 0;
-function makePlayerNameForm() { 
-    // Create a form synamically 
-    var form = document.createElement("form"); 
-    form.onsubmit = logScores;// This is the on click checkResponse function call
-
-    // Create an input element for Name
-    var PlayerEl = document.createElement("input"); 
-    PlayerEl.setAttribute("type", "text"); 
-    PlayerEl.setAttribute("name", "player"); 
-    PlayerEl.setAttribute("data-task-id", taskIdCounter);
+//start with a string
+//make sentence a object
+//enter sentense array - split(sentenceObject) or
+// inverse array order reverse(sentenceArray)
+//
+// sentenseArray.join(' ')
 
 
-    // Create a submit button 
-    var s = document.createElement("input"); 
-    s.setAttribute("type", "submit"); 
-    s.setAttribute("value", "Submit"); 
 
+var sentenceEl = "The quick brown fox jumped over the lazy do."
 
-    // Append the player name input to the form 
-    form.append(PlayerEl);  
-    // Append the button to the form 
-    form.append(s);  
-    
-   nameEnteryEl.appendChild(form); 
+var reverseSentence = function(words){
+   words = words.split(" ")//split by spaces//this is now an array
+   console.log(words)
+
 
 }
-var logScores = function(){
-    console.log("test")
-    taskIdCounter++;
-}
+

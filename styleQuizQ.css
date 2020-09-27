@@ -30,7 +30,6 @@ h4 {
     font-weight:200;
 }
 
-
 button {
     padding: 10px 10px;
     background: #ff8d0a;
@@ -45,10 +44,18 @@ button:hover{
     padding:10px 10px;
     color:black;
 }
-.center{
-    text-align:center;
-    margin:auto;
+
+ul {
+    background-color: #ededed;
+    padding:5px;
+    border-radius: 20px;
+    list-style-type: none;
 }
+
+li {
+    padding:5px;
+}
+
 .question-box {
     margin:auto;
     border: solid 4px #ff8d0a;
@@ -85,10 +92,17 @@ button:hover{
 .timer{
     text-align: center;
 }
-.high-scores-box {
-    background: #ededed;
-    padding:30px;
-    border:5px solid #ff8d0a;
+
+
+.center{
+    text-align:center;
+    margin:auto;
+
+}
+.center-padded{
+    text-align:center;
+    margin:auto;
+    padding: 20px;
 }
 
 

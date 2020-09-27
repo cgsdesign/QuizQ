@@ -53,17 +53,41 @@ var singleQuestionEl = document.createElement("h4");//define
 var timerEl = document.getElementById('timer');
 var nameEnteryEl = document.querySelector("#high-score"); 
 var enterEl = document.querySelector("#playerFormID"); 
-var count = 0;
+var count = 1;
 var taskIdCounter = 0;
 var currentItem = document.querySelector("#scoreList");
 //var subQuestionChoicesEl = document.querySelector("#startButton");
+var listItem = {
+    name: "fill",
+    playerScore: "fill",
+}
 
+//pull past winners
+function pullPastQuizes(){
+    count = window.localStorage.getItem("count",count)
+
+    var listItem = 0;
+    for(var i=0; i<count; i++){
+        listItem = window.localStorage.getItem("pastPlayer"+i);
+        if(listItem !== null){
+            var element = document.createElement('li');
+            console.log(listItem)
+            listItem = listItem.split('"');
+            var listItemName = listItem.splice(3,1);//get name
+            var listItemScore = listItem.splice(5,1);//get score
+            element.textContent = listItemName + listItemScore;//put together
+            //element.textContent = listItem.name;
+            currentItem.append(element)//currentItem.appendChild(listItem);
+        }
+        //console.log(listItem.name);
+        //}
+    }
+}
 
 //start function
 var startQuiz = function() {
     startTimer()
     ButtonBoxEl.innerHTML ="";
-    pullPastQuizes()
     generateQuestion()          
 }
 
@@ -137,7 +161,6 @@ function startTimer(){
     }
 
 //building form
-
 function makePlayerNameForm() { 
     var form = document.createElement("form"); 
     form.setAttribute("id", "playerFormID");
@@ -163,20 +186,10 @@ function makePlayerNameForm() {
    nameEnteryEl.appendChild(form); 
 }
 
-//pull past winners
-function pullPastQuizes(){
-    var listItems = 0;
-    for(var i=0; i<count; i++){
-        listItem = localStorage.getItem("score"+i);
-        currentItems.innerHTML = currentItem.innerHTML + "<li>" + llistItem + "</li>";
-        currentItem.appendChild(listItems)
-    }
-}
-
 //save the player info as an object and store on local storage 
 var logScores = function(){
     var playerNameInput = document.querySelector("input[name='playerName']").value;
-    var playerDataObj = {
+    const playerDataObj = {
         name: playerNameInput,
         playerScore: score
     }
@@ -186,9 +199,11 @@ var logScores = function(){
         return false
     }
     else{
-    localStorage.setItem("score"+count, JSON.stringify(playerDataObj));
+        console.log(`value of count; ${count}`)
+    window.localStorage.setItem("pastPlayer"+count, JSON.stringify(playerDataObj));
     count++;
-    localStorage.setItem("count",count)
+    console.log(count)
+    window.localStorage.setItem("count",count)
     return false
     }
 }
@@ -212,6 +227,7 @@ function stopQuiz(){
 
 //give question content
 mainStartButtonEl.addEventListener("click", startQuiz)
+pullPastQuizes()
 //for this challenge, we will need to print to screen not alert 
 //4.5.6 - must mirror past create El
 //html DOM info field
