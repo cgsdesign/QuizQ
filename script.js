@@ -14,32 +14,7 @@
 
 //Quiz questions 
 //---------NOTE: array in list in array , this is important for 4 loop & quizQuestionEl++
-var quizQuestionEl = [
-    
-{question:"1 is true?",answer:"yes",
-        option: [
-        "yes",
-        "no",
-         "maybe",
-         "definitly not"
-] },
-    { question:"2 is true?",answer:"yes",
-    option: [ 
-         "yes",
-         "radish",
-        "dog",
-        "dream"
-    ]
-},
-    { question:"3 is true?",answer:"yes",
-    option: [
-         "yes",
-         "no",
-         "q",
-         "z"
-    ]
-}
-];
+
 
 var mainStartButtonEl = document.querySelector("#startButton");
 var ButtonBoxEl = document.querySelector("#Button-Box");
@@ -96,15 +71,16 @@ var startQuiz = function() {
 
 //generate question function
 function generateQuestion(){
-        questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
+    questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
+
     if ( questionIndex < quizQuestionEl.length){
         singleQuestionEl.textContent = quizQuestionEl[questionIndex].question;//give question content
         questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
-    
+
         //print answers to screen loop
         for (let i = 0; i < options.length; i++) {
             var choice = document.createElement("button");
-
+            
             choice.setAttribute("value", options[i]);
             choice.setAttribute("class", "option-button")
             choice.onclick = checkResponse;// This is the on click checkResponse function call
@@ -132,6 +108,7 @@ function checkResponse(){
     }
     else{
         questionIndex++;//move ahead cue to next question
+        questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
         score++;//increase score
         generateQuestion();//start next question
     }
