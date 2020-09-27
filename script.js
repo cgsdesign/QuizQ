@@ -61,15 +61,18 @@ var listItem = {
     name: "fill",
     playerScore: "fill",
 }
+var PlayAgain = function() {
+    location.reload();
 
+}
 //pull past winners
 function pullPastQuizes(){
     count = window.localStorage.getItem("count",count)
-
+    currentItem.innerHTML = ""; //CLEAR!!!!!! so can append in new question
     var listItem = 0;
     for(var i=0; i<count; i++){
         listItem = window.localStorage.getItem("pastPlayer"+i);
-        if(listItem !== null){
+       if(listItem !== null){
             var element = document.createElement('li');
             console.log(listItem)
             listItem = listItem.split('"');
@@ -78,7 +81,7 @@ function pullPastQuizes(){
             element.textContent = listItemName + listItemScore;//put together
             //element.textContent = listItem.name;
             currentItem.append(element)//currentItem.appendChild(listItem);
-        }
+       }
         //console.log(listItem.name);
         //}
     }
@@ -204,6 +207,7 @@ var logScores = function(){
     count++;
     console.log(count)
     window.localStorage.setItem("count",count)
+    PlayAgain()
     return false
     }
 }
@@ -218,12 +222,8 @@ function stopQuiz(){
     singleQuestionEl.textContent = "Your final score is " + score + ".";//give question content
     questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
     makePlayerNameForm()
-    console.log("form made")
     //enterEl.addEventListener("submit", saveQuiz)
-
    }
-
-
 
 //give question content
 mainStartButtonEl.addEventListener("click", startQuiz)
