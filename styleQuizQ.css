@@ -9,18 +9,6 @@
 body {
     padding: 20px;
 }
-.question-box {
-    margin:auto;
-    border: solid 4px #ff8d0a;
-    background: #ededed;
-    padding: 20px;
-    border-radius: 20px;
-    text-align:center;
-    
-}
-.inner-box {
-    color:black;
-}
 
 h1 {
     font-family: 'Barlow Condensed', sans-serif;
@@ -57,6 +45,23 @@ button:hover{
     padding:10px 10px;
     color:black;
 }
+.center{
+    text-align:center;
+    margin:auto;
+}
+.question-box {
+    margin:auto;
+    border: solid 4px #ff8d0a;
+    background: #ededed;
+    padding: 20px;
+    border-radius: 20px;
+    text-align:center;
+    
+}
+.inner-box {
+    color:black;
+}
+
 .button-box {
     padding:10px;
     margin: auto;

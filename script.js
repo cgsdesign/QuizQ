@@ -50,21 +50,29 @@ var timeLeft = 200;
 var questionBoxEl = document.querySelector("#questions");//find box
 var singleQuestionEl = document.createElement("h4");//define
 var timerEl = document.getElementById('timer');
-var highScoreEl = document.getElementById("#high-score");
-
+var nameEnteryEl = document.querySelector("#high-score"); 
+var enterEl = document.querySelector("#playerFormID"); 
+var count = 0;
+var taskIdCounter = 0;
+var currentItem = document.querySelector("#scoreList");
 //var subQuestionChoicesEl = document.querySelector("#startButton");
 
-//questionIndex++
-//check to see if you reached last question
-//if end game
-//else startquiz()
 
+//pull pasy winners
+function pullPastQuizes(){
+    var listItems = 0;
+    for(var i=0; i<count; i++){
+        currentItem = localStorage.getItem("score"+i);
+        listItems.innerHTML = scoreList.innerHTML + "<li>" + currentItem + "</li>";
+        scoreList.appendChild(listItems)
+    }
 
-
+    }
 
 //start function
 var startQuiz = function() {
     startTimer()
+    pullPastQuizes()
     generateQuestion()          
 }
 
@@ -136,39 +144,55 @@ function startTimer(){
       }, 1000);
     }
 
-
 //building form
-var nameEnteryEl = document.querySelector("#high-score"); 
-var taskIdCounter = 0;
-function makePlayerNameForm() { 
 
-    // Create a form synamically 
+function makePlayerNameForm() { 
     var form = document.createElement("form"); 
+    form.setAttribute("id", "playerFormID"); 
+    form.setAttribute("data-task-id", taskIdCounter);
+   // --------------form.onsubmit = logScores;// This is the on click checkResponse function call
 
     // Create an input element for Name
     var PlayerEl = document.createElement("input"); 
     PlayerEl.setAttribute("type", "text"); 
-    PlayerEl.setAttribute("name", "player"); 
-    PlayerEl.setAttribute("data-task-id", taskIdCounter);
+    PlayerEl.setAttribute("name", "playerName"); 
+
 
     // Create a submit button 
     var s = document.createElement("input"); 
     s.setAttribute("type", "submit"); 
     s.setAttribute("value", "Submit"); 
-    s.onclick = logScores;// This is the on click checkResponse function call
 
 
     // Append the player name input to the form 
     form.append(PlayerEl);  
     // Append the button to the form 
     form.append(s);  
-    
+
    nameEnteryEl.appendChild(form); 
 }
+//save the player info as an object
 var logScores = function(){
     console.log("test")
-    taskIdCounter++;
-}
+    var playerNameInput = document.querySelector("input[name='playerName']").value;
+    if (!playerNameInput) {
+        alert("Please fill our all of the form.")
+        return false
+    }
+    else{
+    var playerDataObj = {
+        name: playerNameInput,
+        playerScore: score,
+       //--------------- playerNumber: taskIdCounter
+    }
+    console.log(playerDataObj)
+    localStorage.setItem("score"+count,JSON.stringify(playerDataObj));
+    //------------------taskIdCounter++;
+    count++;
+    localStorage.setItem("count",count)
+    prompt("do you wantto replay?")//set to stop process
+    }
+}//this is when the whole thing is auto refreshing
 
 
 //stopQuiz function
@@ -180,25 +204,15 @@ function stopQuiz(){
     singleQuestionEl.textContent = "Your final score is " + score + ".";//give question content
     questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
     makePlayerNameForm()
+    console.log("form made")
+    //enterEl.addEventListener("submit", saveQuiz)
+
    }
 
-
-//record highscore function
-function highScore(){
-
- //   highScoreEl.innerHTML="Enter your name and hit return to save your high score!<input type='text'><input/>";
- //   questionBoxEl.appendChild(highScoreEl);//put in box on page 
- //   questionBoxEl.addEventListener("submit", saveQuiz)
-}
-function saveQuiz(){
-    console.log()
-}
 
 
 //give question content
 mainStartButtonEl.addEventListener("click", startQuiz)
-questionBoxEl.addEventListener("submit",logScores)
-
 //for this challenge, we will need to print to screen not alert 
 //4.5.6 - must mirror past create El
 //html DOM info field
