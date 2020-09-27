@@ -42,6 +42,7 @@ var quizQuestionEl = [
 ];
 
 var mainStartButtonEl = document.querySelector("#startButton");
+var ButtonBoxEl = document.querySelector("#Button-Box");
 var questionIndex = 0;
 var score = 0;
 var options = quizQuestionEl[questionIndex].option;
@@ -72,6 +73,7 @@ function pullPastQuizes(){
 //start function
 var startQuiz = function() {
     startTimer()
+    ButtonBoxEl.innerHTML ="";
     pullPastQuizes()
     generateQuestion()          
 }
