@@ -122,7 +122,7 @@ function timeSubtractionTime(){
 //timer function
 function startTimer(){
       var timeInterval = setInterval(function() {
-        if (timeLeft === 1000000) {
+        if (timeLeft === -11111111) {
             return}
         else if (timeLeft > 1) {
           timerEl.textContent = timeLeft;
@@ -134,10 +134,11 @@ function startTimer(){
         }
       }, 1000);
     }
+
 //stopQuiz function
 function stopQuiz(){
  console.log("End of quiz!!!!");
- timeLeft= 1000000;
+ timeLeft= -11111111;
  timerEl.textContent = 'Nice Job!';
  questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
  singleQuestionEl.textContent = "Your final score is " + score + ".";//give question content
