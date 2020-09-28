@@ -10,18 +10,14 @@
 //create variables
 //
 //-------switch, function, task id, 
-
-
-//Quiz questions 
 //---------NOTE: array in list in array , this is important for 4 loop & quizQuestionEl++
 
 
 var mainStartButtonEl = document.querySelector("#startButton");
+var clearButtonEl = document.querySelector("#clearButton");
 var ButtonBoxEl = document.querySelector("#Button-Box");
 var questionIndex = 0;
 var score = 0;
-//var options = quizQuestionEl[questionIndex].option;
-var questionAnswer = quizQuestionEl[questionIndex].answer;
 var timeLeft = 30;
 var questionBoxEl = document.querySelector("#questions");//find box
 var singleQuestionEl = document.createElement("h4");//define
@@ -32,25 +28,25 @@ var count = 1;
 var taskIdCounter = 0;
 var currentItem = document.querySelector("#scoreList");
 var correctFalse = document.querySelector("#correct");
-//var subQuestionChoicesEl = document.querySelector("#startButton");
-
 var listItem = {
     name: "fill",
     playerScore: "fill",
 }
 
+//play again function
 var PlayAgain = function() {
     location.reload();
 
 }
 
-//pull past winners
+//pull past winners function
 function pullPastQuizes(){
     count = window.localStorage.getItem("count",count)
-    currentItem.innerHTML = ""; //CLEAR!!!!!! so can append in new question
     var listItem = 0;
     for(var i=0; i<count; i++){
         listItem = window.localStorage.getItem("pastPlayer"+i);
+        //listItemMod = listItem.replace('}', ' ');
+
        if(listItem !== null){
             var element = document.createElement('li');
             console.log(listItem)
@@ -58,19 +54,9 @@ function pullPastQuizes(){
             var listItemName = listItem.splice(3,1);//get name
             var listItemScore = listItem.splice(5,1);//get score
             element.textContent = listItemName + listItemScore;//put together
-            //element.textContent = listItem.name;
-            currentItem.append(element)//currentItem.appendChild(listItem);
+            currentItem.append(element)
        }
-        //console.log(listItem.name);
-        //}
     }
-}
-
-//start function
-var startQuiz = function() {
-    startTimer()
-    ButtonBoxEl.innerHTML ="";
-    generateQuestion()          
 }
 
 //save the player info as an object and store on local storage 
@@ -97,6 +83,13 @@ var logScores = function(){
     PlayAgain()
     return false
     }
+}
+
+//start function
+var startQuiz = function() {
+    startTimer()
+    ButtonBoxEl.innerHTML ="";//clears button off screen
+    generateQuestion()          
 }
 
 //generate question function
@@ -126,7 +119,6 @@ function generateQuestion(){
 } 
 
 //check if question chosen is correct. 
-//---------this.value generates equivelent of eventListener!!!!!!!
 function checkResponse(){
     var response = this.value;
     if(response !== quizQuestionEl[questionIndex].answer){
@@ -158,7 +150,7 @@ function timeSubtractionTime(){
 function startTimer(){
       var timeInterval = setInterval(function() {
         if (timeLeft === -11111111) {
-            return}
+            return}// prevents double stopping quiz function
         else if (timeLeft > 1) {
           timerEl.textContent = timeLeft;
           timeLeft = timeLeft -1;
@@ -196,7 +188,10 @@ function makePlayerNameForm() {
 
    nameEnteryEl.appendChild(form); 
 }
-
+var clearScores = function() {
+    currentItem.innerHTML = ""; //CLEAR!!!!!! so can append in new question
+    localStorage.clear();
+}
 
 
 //stopQuiz function
@@ -213,6 +208,7 @@ function stopQuiz(){
 
 //give question content
 mainStartButtonEl.addEventListener("click", startQuiz)
+clearButtonEl.addEventListener("click", clearScores)
 pullPastQuizes()
 //for this challenge, we will need to print to screen not alert 
 //4.5.6 - must mirror past create El

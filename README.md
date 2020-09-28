@@ -1,6 +1,6 @@
 ### Live site at [QuizQ](https://cgsdesign.github.io/QuizQ/)
 ​
-For this project I worked primarily in Javasript to create a functional quiz. The given quiz utalizes Javascript to rewrite element of the screen and track scores. Using Local storage, players can keep track of their scores between session.
+For this project I worked primarily in JavaScript to create a functional quiz. The given quiz utilizes Javascript to rewrite element of the screen and track scores. Using Local storage, players can keep track of their scores between session.
 ​
 ## Key Features
 * Clean CSS matching brand orange
@@ -12,7 +12,7 @@ For this project I worked primarily in Javasript to create a functional quiz. Th
 
 
 
-![Password Generator](./assets/Images/mockup.png)
+![Password Generator](./assets/Images/mockupQuizQ.png)
 
 
 ## Credits
