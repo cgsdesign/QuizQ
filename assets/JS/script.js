@@ -22,7 +22,7 @@ var questionIndex = 0;
 var score = 0;
 //var options = quizQuestionEl[questionIndex].option;
 var questionAnswer = quizQuestionEl[questionIndex].answer;
-var timeLeft = 200;
+var timeLeft = 30;
 var questionBoxEl = document.querySelector("#questions");//find box
 var singleQuestionEl = document.createElement("h4");//define
 var timerEl = document.getElementById('timer');
@@ -78,7 +78,7 @@ var logScores = function(){
     var playerNameInput = document.querySelector("input[name='playerName']").value;
     const playerDataObj = {
         name: playerNameInput,
-        playerScore: score
+        playerScore: score*10
     }
     console.log(playerDataObj)
     if (!playerNameInput) {
@@ -202,7 +202,7 @@ function stopQuiz(){
     timeLeft= -11111111;
     timerEl.textContent = 'Nice Job!';
     questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
-    singleQuestionEl.textContent = "Your final score is " + score + ".";//give question content
+    singleQuestionEl.textContent = "Your final score is " + score*10 + ".";//give question content
     questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
     makePlayerNameForm()
     //enterEl.addEventListener("submit", saveQuiz)
