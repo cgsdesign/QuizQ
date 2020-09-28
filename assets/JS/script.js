@@ -87,6 +87,9 @@ var logScores = function(){
     }
     else{
         console.log(`value of count; ${count}`)
+        if (count === null){
+            count = 0
+        }
     window.localStorage.setItem("pastPlayer"+count, JSON.stringify(playerDataObj));
     count++;
     console.log(count)
