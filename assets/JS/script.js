@@ -33,14 +33,17 @@ var taskIdCounter = 0;
 var currentItem = document.querySelector("#scoreList");
 var correctFalse = document.querySelector("#correct");
 //var subQuestionChoicesEl = document.querySelector("#startButton");
+
 var listItem = {
     name: "fill",
     playerScore: "fill",
 }
+
 var PlayAgain = function() {
     location.reload();
 
 }
+
 //pull past winners
 function pullPastQuizes(){
     count = window.localStorage.getItem("count",count)
@@ -70,12 +73,35 @@ var startQuiz = function() {
     generateQuestion()          
 }
 
+//save the player info as an object and store on local storage 
+var logScores = function(){
+    var playerNameInput = document.querySelector("input[name='playerName']").value;
+    const playerDataObj = {
+        name: playerNameInput,
+        playerScore: score
+    }
+    console.log(playerDataObj)
+    if (!playerNameInput) {
+        alert("Please choose a name.")
+        return false
+    }
+    else{
+        console.log(`value of count; ${count}`)
+    window.localStorage.setItem("pastPlayer"+count, JSON.stringify(playerDataObj));
+    count++;
+    console.log(count)
+    window.localStorage.setItem("count",count)
+    PlayAgain()
+    return false
+    }
+}
+
 //generate question function
 function generateQuestion(){
     questionBoxEl.innerHTML = ""; //CLEAR!!!!!! so can append in new question
     var options = quizQuestionEl[questionIndex].option;
 
-    if ( questionIndex < quizQuestionEl.length){
+    if ( questionIndex < quizQuestionEl.length-1){
         singleQuestionEl.textContent = quizQuestionEl[questionIndex].question;//give question content
         questionBoxEl.appendChild(singleQuestionEl);//put in box on page 
         //print answers to screen loop
@@ -168,28 +194,6 @@ function makePlayerNameForm() {
    nameEnteryEl.appendChild(form); 
 }
 
-//save the player info as an object and store on local storage 
-var logScores = function(){
-    var playerNameInput = document.querySelector("input[name='playerName']").value;
-    const playerDataObj = {
-        name: playerNameInput,
-        playerScore: score
-    }
-    console.log(playerDataObj)
-    if (!playerNameInput) {
-        alert("Please choose a name.")
-        return false
-    }
-    else{
-        console.log(`value of count; ${count}`)
-    window.localStorage.setItem("pastPlayer"+count, JSON.stringify(playerDataObj));
-    count++;
-    console.log(count)
-    window.localStorage.setItem("count",count)
-    PlayAgain()
-    return false
-    }
-}
 
 
 //stopQuiz function
